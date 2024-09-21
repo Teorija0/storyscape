@@ -161,7 +161,7 @@
         }
 
         .container.dark {
-            background-color: #444;
+            background-color: #444 !important;
             color: #f5f7fa;
             /* Light text for container */
         }
@@ -347,7 +347,7 @@
         <p>“Don’t worry, Ollie, I’ll think of something,” DALL·E said determinedly. The bee then flew down and buzzed
             around the two men, darting close to their faces to distract them. The men swatted at DALL·E, annoyed.</p>
 
-        <img src="men_axes.webp" alt="Men with axes" >
+        <img src="men_axes.webp" alt="Men with axes">
         <div class="caption">Men with axes coming to cut down the tree</div>
 
         <p>But DALL·E wasn’t alone. Spinella crawled quickly along her web, silently summoning the other insects and
@@ -385,6 +385,7 @@
         const siteName = document.querySelector('.site-name');
         const storiesSection = document.getElementById('stories');
         const aboutSection = document.getElementById('about');
+        const storySection = document.getElementById('story');
 
         modeSwitch.addEventListener('change', () => {
             body.classList.toggle('dark');
@@ -395,12 +396,13 @@
             siteName.classList.toggle('dark');
             storiesSection.classList.toggle('dark'); // Ensure stories section toggles
             aboutSection.classList.toggle('dark'); // Ensure about section toggles
+            storySection.classList.toggle('dark');
         });
 
         const homeLink = document.querySelector('a[href="#home"]');
         const storiesLink = document.querySelector('a[href="#stories"]');
         const aboutLink = document.querySelector('a[href="#about"]');
-        const storySection = document.getElementById('story');
+
 
         homeLink.addEventListener('click', () => {
             storySection.style.display = 'none'; // Hide story section
