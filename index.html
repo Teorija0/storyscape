@@ -2,441 +2,77 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StoryScape</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        header {
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: background-color 0.3s;
-            background-color: white;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .site-name {
-            font-size: 36px;
-            font-weight: bold;
-            color: #ff7f50;
-            transition: color 0.3s;
-        }
-
-        .site-name .emphasized {
-            color: #ffa500;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-            background-color: white;
-            transition: background-color 0.3s;
-        }
-
-        .navbar a {
-            color: #333;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s, transform 0.2s;
-        }
-
-        .navbar a:hover {
-            color: #ff7f50;
-            transform: scale(1.1);
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: white;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            animation: fadeIn 1s ease-out;
-            transition: background-color 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1,
-        h2 {
-            color: #ff7f50;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        p {
-            font-size: 18px;
-            margin-bottom: 1.5em;
-            line-height: 1.8;
-        }
-
-        .character {
-            font-weight: bold;
-        }
-
-        h2 {
-            margin-top: 40px;
-            text-align: left;
-            font-size: 24px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ff7f50;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 16px;
-            color: #666;
-            padding: 20px 0;
-            border-top: 1px solid #ddd;
-            background-color: white;
-            transition: background-color 0.3s;
-        }
-
-        img {
-            display: block;
-            max-width: 85%;
-            margin: 20px auto;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .caption {
-            text-align: center;
-            font-size: 14px;
-            color: #555;
-            margin-top: -10px;
-            margin-bottom: 20px;
-        }
-
-        /* Dark mode styles */
-        body.dark {
-            background-color: #333;
-            color: #f5f7fa;
-            /* Light text */
-        }
-
-        header.dark {
-            background-color: #444;
-        }
-
-        .navbar.dark {
-            background-color: #444;
-        }
-
-        .navbar.dark a {
-            color: #f5f7fa;
-            /* Light text for navbar links */
-        }
-
-        .container.dark {
-            background-color: #444 !important;
-            color: #f5f7fa;
-            /* Light text for container */
-        }
-
-        .footer.dark {
-            background-color: #444;
-        }
-
-        .switch-label {
-            margin-right: 10px;
-            color: #333;
-            font-weight: 500;
-            /* Slightly bold */
-            transition: color 0.3s;
-        }
-
-        body.dark .switch-label {
-            color: #f5f7fa;
-            /* Light text for switch label */
-        }
-
-        /* Switch styles */
-        .switch {
-            display: flex;
-            align-items: center;
-            margin-left: 20px;
-        }
-
-        .switch input {
-            display: none;
-        }
-
-        .toggle {
-            cursor: pointer;
-            width: 60px;
-            height: 30px;
-            background-color: #ccc;
-            border-radius: 15px;
-            position: relative;
-            transition: background-color 0.3s;
-        }
-
-        .toggle:before {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 24px;
-            height: 24px;
-            background-color: white;
-            border-radius: 50%;
-            transition: transform 0.3s;
-        }
-
-        input:checked+.toggle {
-            background-color: #ffa500;
-        }
-
-        input:checked+.toggle:before {
-            transform: translateX(30px);
-        }
-
-        /* Updated styles for stories section */
-        ul {
-            list-style-type: none;
-            /* Remove bullet points */
-            padding: 0;
-        }
-
-        li {
-            margin: 15px 0;
-            /* Space between story items */
-        }
-
-        .story-link {
-            text-decoration: none;
-            /* Remove underline */
-            color: #ffa500;
-            /* Same color as Scape */
-            font-weight: bold;
-            /* Bold text */
-            font-size: 20px;
-            /* Larger font size */
-            transition: color 0.3s, transform 0.2s;
-            /* Transition effects */
-        }
-
-        .story-link:hover {
-            color: #ff7f50;
-            /* Lighter shade on hover */
-            transform: scale(1.05);
-            /* Slightly scale up */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryScape</title>
+  <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-
-    <header>
-        <div class="header-content">
-            <div class="switch">
-                <label class="switch-label" for="modeSwitch">Light / Dark</label>
-                <input type="checkbox" id="modeSwitch">
-                <label class="toggle" for="modeSwitch"></label>
-            </div>
-            <div class="site-name">Story<span class="emphasized">Scape</span></div>
-        </div>
-    </header>
-
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#stories">Stories</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+  <header>
+    <div class="header-content">
+      <div class="switch">
+        <label class="switch-label" for="modeSwitch">Light / Dark</label>
+        <input type="checkbox" id="modeSwitch">
+        <label class="toggle" for="modeSwitch"></label>
+      </div>
+      <div class="site-name">Story<span class="emphasized">Scape</span></div>
     </div>
+  </header>
 
-    <!-- Home Screen Section -->
-    <div id="home" class="container">
-        <h1>Welcome to Story<span class="emphasized">Scape</span></h1>
-        <p>Your destination for wonderful tales and adventures.</p>
-        <p>Explore stories that inspire, entertain, and enlighten.</p>
-    </div>
+  <div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#stories">Stories</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
 
-    <!-- Stories Section -->
-    <div id="stories" class="container" style="display: none;">
-        <h1>Our Stories</h1>
-        <ul>
-            <li><a href="#story" class="story-link">The Story of Ollie the Orange</a></li>
-            <!-- Add more stories here -->
-        </ul>
-    </div>
+  <!-- Home Screen Section -->
+  <div id="home" class="container">
+    <h1>Welcome to Story<span class="emphasized">Scape</span></h1>
+    <p>Your destination for wonderful tales and adventures.</p>
+    <p>Explore stories that inspire, entertain, and enlighten.</p>
+  </div>
 
-    <!-- About Section -->
-    <div id="about" class="container" style="display: none;">
-        <h1>About StoryScape</h1>
-        <p>Welcome to StoryScape, where your imagination comes to life through engaging tales and stories. Our platform
-            aims to inspire creativity and foster a love for storytelling.</p>
-        <p>Join us as we explore the world of stories, one adventure at a time!</p>
-    </div>
+  <!-- Stories Section -->
+  <div id="stories" class="container" style="display: none;">
+    <h1>Our Stories</h1>
+    <ul>
+      <li>
+        <a href="#story" class="story-link" data-file="ollieorange.html">The Story of Ollie the Orange</a>
+      </li>
+      <li>
+        <a href="#lantern" class="story-link" data-file="lantern.html">The Lantern of Luminous Dreams</a>
+      </li>
+    </ul>
+    <div id="story-content" style="display: none;"></div> <!-- Placeholder for imported content -->
+  </div>
 
-    <!-- Story Section -->
-    <div id="story" class="container" style="display: none;">
-        <h1>The Story of Ollie the Orange</h1>
-        <p>Once upon a time, in a sunny orchard, there lived a young orange named Ollie. Ollie was full of dreams and
-            aspirations. He wanted to grow up to be the juiciest orange in the orchard. He watched as other oranges were
-            picked and taken away, but he knew he had a long way to go before he could be picked. But he was happy
-            hanging on his branch, soaking in the sun and listening to the other fruits chatter.</p>
+  <!-- About Section -->
+  <div id="about" class="container" style="display: none;">
+    <h1>About StoryScape</h1>
+    <p>
+      Welcome to StoryScape, where your imagination comes to life through
+      engaging tales and stories. Our platform aims to inspire creativity and
+      foster a love for storytelling.
+    </p>
+    <p>
+      Join us as we explore the world of stories, one adventure at a time!
+    </p>
+  </div>
 
-        <p>One day, as Ollie enjoyed his sunny spot, a strong wind began to blow. “Oh no!” he exclaimed as the branches
-            swayed back and forth. The world around him became a whirlwind of colors and sounds. Ollie felt a bit
-            scared, but he didn’t want to fall; he wanted to grow big and juicy!</p>
+  <!-- Contact Section -->
+  <div id="contact" class="container" style="display: none;">
+    <h1>Contact Us</h1>
+    <p>
+      Have any questions or want to share your stories? Feel free to reach
+      out!
+    </p>
+  </div>
 
-        <p>Just as Ollie clung tighter to his branch, he noticed a shadow passing overhead. It was <span
-                class="character">DALL·E</span>, a clever and adventurous bee who loved helping others. DALL·E had been
-            gathering nectar from flowers when he noticed Ollie in trouble. Without hesitating, he zoomed over to the
-            tree.</p>
+  <footer class="footer">© 2024 StoryScape | By Teorija</footer>
 
-        <p>“Hold on, Ollie! I’ve got an idea!” DALL·E shouted, circling around the tree. He quickly flew over to a
-            nearby spider, a friendly garden helper named Spinella. “Spinella, we need your web! Can you help?” DALL·E
-            explained the situation in a flash.</p>
-
-        <p>Spinella agreed and started weaving a strong, sticky web between the branches, creating a net under Ollie.
-            With DALL·E’s guidance, the web was secured just in time, right before Ollie could fall. The net caught him
-            gently, saving him from hitting the hard ground.</p>
-
-        <p>Ollie sighed in relief. “Thank you, DALL·E! You and Spinella saved me!”</p>
-
-        <p>DALL·E buzzed happily. “That’s what friends are for, Ollie! Now you can hang here safely until you're truly
-            ready to be picked.”</p>
-
-        <h2>The Men with Axes</h2>
-
-        <p>But just when everything seemed calm, Ollie heard a new noise. Heavy footsteps. Two men appeared at the edge
-            of the orchard, carrying large axes over their shoulders.</p>
-
-        <p>“I think this tree has lived long enough,” one of them grumbled. “It doesn’t bear as much fruit as it used
-            to. Time to chop it down.”</p>
-
-        <p>Ollie’s heart raced. "They want to cut down my tree!" he whispered, trembling. He wasn’t ready to leave
-            yet—there was still so much more time he needed to ripen fully! DALL·E heard the voices too, and he zipped
-            up to Ollie’s side.</p>
-
-        <p>“Don’t worry, Ollie, I’ll think of something,” DALL·E said determinedly. The bee then flew down and buzzed
-            around the two men, darting close to their faces to distract them. The men swatted at DALL·E, annoyed.</p>
-
-        <img src="men_axes.webp" alt="Men with axes">
-        <div class="caption">Men with axes coming to cut down the tree</div>
-
-        <p>But DALL·E wasn’t alone. Spinella crawled quickly along her web, silently summoning the other insects and
-            creatures of the orchard. Soon, a whole army of bees, butterflies, and even ants were working together to
-            protect the tree.</p>
-
-        <p>Just as the men raised their axes, the ground beneath them began to tremble. Out of nowhere, a family of
-            moles popped up, causing the men to stumble. With bees buzzing in their ears and the ground shifting under
-            their feet, the men got spooked.</p>
-
-        <p>“This tree’s too much trouble!” one of the men finally shouted. “Let’s leave it for now!”</p>
-
-        <p>And just like that, they dropped their axes and hurried away.</p>
-
-        <p>Ollie sighed in relief once more. “Thank you, DALL·E! You and all the others saved the tree!”</p>
-
-        <p>DALL·E buzzed proudly, hovering next to Ollie. “The orchard is full of life, Ollie. And we protect each
-            other!”</p>
-
-        <p>Ollie realized then that even the smallest creatures could make a big difference. With his new friends, the
-            tree was safe, and Ollie could continue to grow.</p>
-
-        <p><strong>The End.</strong></p>
-    </div>
-
-    <div class="footer">© 2024 Story<span class="emphasized">Scape</span> | Story by Teorija</div>
-
-    <script>
-        const modeSwitch = document.getElementById('modeSwitch');
-        const body = document.body;
-        const container = document.querySelector('.container');
-        const footer = document.querySelector('.footer');
-        const header = document.querySelector('header');
-        const navbar = document.querySelector('.navbar');
-        const siteName = document.querySelector('.site-name');
-        const storiesSection = document.getElementById('stories');
-        const aboutSection = document.getElementById('about');
-        const storySection = document.getElementById('story');
-
-        modeSwitch.addEventListener('change', () => {
-            body.classList.toggle('dark');
-            container.classList.toggle('dark');
-            footer.classList.toggle('dark');
-            header.classList.toggle('dark');
-            navbar.classList.toggle('dark');
-            siteName.classList.toggle('dark');
-            storiesSection.classList.toggle('dark'); // Ensure stories section toggles
-            aboutSection.classList.toggle('dark'); // Ensure about section toggles
-            storySection.classList.toggle('dark');
-        });
-
-        const homeLink = document.querySelector('a[href="#home"]');
-        const storiesLink = document.querySelector('a[href="#stories"]');
-        const aboutLink = document.querySelector('a[href="#about"]');
-
-
-        homeLink.addEventListener('click', () => {
-            storySection.style.display = 'none'; // Hide story section
-            storiesSection.style.display = 'none'; // Hide stories section
-            aboutSection.style.display = 'none'; // Hide about section
-            document.getElementById('home').style.display = 'block'; // Show home section
-        });
-
-        storiesLink.addEventListener('click', () => {
-            storySection.style.display = 'none'; // Hide story section
-            document.getElementById('home').style.display = 'none'; // Hide home section
-            aboutSection.style.display = 'none'; // Hide about section
-            storiesSection.style.display = 'block'; // Show stories section
-        });
-
-        aboutLink.addEventListener('click', () => {
-            storySection.style.display = 'none'; // Hide story section
-            storiesSection.style.display = 'none'; // Hide stories section
-            document.getElementById('home').style.display = 'none'; // Hide home section
-            aboutSection.style.display = 'block'; // Show about section
-        });
-
-        const storyLinks = document.querySelectorAll('.story-link');
-        storyLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default anchor behavior
-                storySection.style.display = 'block'; // Show story section
-                document.getElementById('home').style.display = 'none'; // Hide home section
-                storiesSection.style.display = 'none'; // Hide stories section
-                aboutSection.style.display = 'none'; // Hide about section
-            });
-        });
-    </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
