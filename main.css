@@ -195,7 +195,6 @@ body.dark .switch-label {
 .switch {
     display: flex;
     align-items: center;
-    margin-left: 20px;
 }
 
 .switch input {
